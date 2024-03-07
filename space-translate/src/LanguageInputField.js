@@ -1,9 +1,13 @@
 
-export default function LanguageInputField() {
+export default function LanguageInputField({inputValue, onInputChange}) {
 
     return (
         <div>
-            <input name="myInput" />
+            <input
+                type = "text"
+                name="inputField"
+                onChange={onInputChange}
+            />
         </div>
 
     );
