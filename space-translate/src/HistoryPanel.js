@@ -1,12 +1,21 @@
 import './HistoryPanel.css';
 import React from 'react';
 
-export default function HistoryPanel() {
+export default function HistoryPanel( {words} ) {
     return (
         <div className={"split-panel"}>
             <div className="panel-content">
                 Right Panel Content
-                {/* Buraya daha fazla içerik veya bileşen ekleyebilirsiniz */}
+                {console.log(words)}
+                 <ul>
+                    {words.map((element, key) =>
+                        <div key={element.key}>
+                            <p>{element.word} - {element.translation}</p>
+                        </div>
+                     )}
+
+                 </ul>
+
             </div>
 
         </div>
