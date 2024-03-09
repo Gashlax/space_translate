@@ -1,14 +1,16 @@
 .split-panel {
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 50%; /* Panelin ekranın ne kadarlık bir kısmını kaplayacağını ayarlayabilirsiniz */
-    height: 100%;
-    background-color: #f4f4f4;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
-    transition: transform 0.3s ease-in-out;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 30%;
+  height: 100%;
+  background-color: #f4f4f4;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease-in-out;
 }
 
 .panel-content {
-    padding: 20px;
+  padding: 20px;
 }
+
+/*# sourceMappingURL=HistoryPanel.css.map */

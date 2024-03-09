@@ -87,7 +87,7 @@ function App() {
 
 
     return (
-        <div>
+        <div className="container">
             <LanguageInputField inputValue={input} onInputChange={handleInputChange}/>
             <div onClick={toggleHistoryPanel}>History</div>
             {isHistoryPanelOpen && <HistoryPanel words={words} onHistoryClicked={onHistoryClicked}/>}
