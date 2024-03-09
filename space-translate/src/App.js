@@ -4,6 +4,7 @@ import LanguageOutputField from './LanguageOutputField.js';
 import React, {useEffect, useState} from 'react';
 import HistoryPanel from "./HistoryPanel";
 import { debounce } from 'lodash';
+import SpeechToText from "./SpeechToText";
 
 
 function App() {
@@ -48,7 +49,7 @@ function App() {
         }
     }
 
-    const debouncedTranslation = debounce(fetchTranslation, 900);
+    const debouncedTranslation = debounce(fetchTranslation, 500);
 
     const addWordTranslationPair = (word, translated) => {
         const updateWords = [
@@ -63,6 +64,10 @@ function App() {
         ];
         setWords(updateWords);
     };
+
+    const speechToText = (text) => {
+        setInput(text);
+    }
 
 
     const handleInputChange = (event) => {
@@ -86,6 +91,7 @@ function App() {
             <LanguageInputField inputValue={input} onInputChange={handleInputChange}/>
             <div onClick={toggleHistoryPanel}>History</div>
             {isHistoryPanelOpen && <HistoryPanel words={words} onHistoryClicked={onHistoryClicked}/>}
+            <SpeechToText onRecord = {speechToText}/>
             <LanguageOutputField outputValue={output}/>
         </div>
 
