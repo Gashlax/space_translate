@@ -1,15 +1,14 @@
 import './HistoryPanel.css';
 import React from 'react';
 
-export default function HistoryPanel( {words} ) {
+export default function HistoryPanel( {words, onHistoryClicked} ) {
     return (
         <div className={"split-panel"}>
             <div className="panel-content">
                 Right Panel Content
-                {console.log(words)}
                  <ul>
                     {words.map((element, key) =>
-                        <div key={element.key}>
+                        <div key={element.key} onClick={() => onHistoryClicked(element.word, element.translation)}>
                             <p>{element.word} - {element.translation}</p>
                         </div>
                      )}

@@ -1,10 +1,10 @@
 
-export default function LanguageOutputField({inputValue}) {
+export default function LanguageOutputField({outputValue}) {
     return(
          <div>
              <input
                 name="outputField"
-                value= {inputValue}
+                value= {outputValue}
              />
          </div>
     );

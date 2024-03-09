@@ -7,6 +7,7 @@ export default function LanguageInputField({inputValue, onInputChange}) {
                 type = "text"
                 name="inputField"
                 onChange={onInputChange}
+                value={inputValue}
             />
         </div>
 
