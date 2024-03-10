@@ -1,11 +1,12 @@
 import React from "react";
+import {FaArrowRight} from "react-icons/fa6";
 
 export default function LanguageOutputField({outputValue}) {
     return(
-        <div className="input-container">
-            TR
+        <div className="output-container" >
+            <h3 className="heading"><FaArrowRight/>TR</h3>
              <textarea
-                 className="input-field"
+                 className="output-field"
                  value={outputValue}
                  placeholder="Translated text will appear here."
              />

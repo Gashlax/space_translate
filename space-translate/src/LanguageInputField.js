@@ -1,12 +1,13 @@
 import React from 'react';
 import './LanguageField.sass'
 import SpeechToText from "./SpeechToText";
+import {FaArrowRight} from "react-icons/fa6";
 
 export default function LanguageInputField({inputValue, onInputChange, speechToText}) {
 
     return (
         <div className="input-container">
-            ENG
+            <h3 className="heading">ENG<FaArrowRight/></h3>
             <textarea
                 className="input-field"
                 onChange={onInputChange}
