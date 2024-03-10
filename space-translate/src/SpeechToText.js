@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {FaMicrophone, FaMicrophoneSlash} from "react-icons/fa6";
 
 const SpeechToText = ( {onRecord} ) => {
     const [isListening, setIsListening] = useState(false);
@@ -38,7 +39,9 @@ const SpeechToText = ( {onRecord} ) => {
     return (
         <div>
             <button onClick={() => setIsListening(!isListening)}>
-                {isListening ? 'Stop Listening' : 'Start Listening'}
+                {isListening ? <FaMicrophoneSlash style={{color: "red", fontSize:'20px'}}/>
+                    :
+                    <FaMicrophone style={{color: "green", fontSize:'20px'}}/>}
             </button>
             {error && <p>Error: {error}</p>}
         </div>
