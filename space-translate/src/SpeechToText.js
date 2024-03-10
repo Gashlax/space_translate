@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const SpeechToText = ({onRecord}) => {
+const SpeechToText = ( {onRecord} ) => {
     const [isListening, setIsListening] = useState(false);
     const [error, setError] = useState(null);
 

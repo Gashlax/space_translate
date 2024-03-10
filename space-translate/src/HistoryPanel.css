@@ -2,7 +2,7 @@
   position: fixed;
   right: 0;
   top: 0;
-  width: 30%;
+  width: 25%;
   height: 100%;
   background-color: #f4f4f4;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
@@ -11,6 +11,50 @@
 
 .panel-content {
   padding: 20px;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.history-header h2 {
+  margin: 0;
+}
+.history-header .clear-button {
+  background-color: #f4f4f4;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  background-color: #e4e4e4;
+}
+.history-list {
+  list-style: none;
+  font-family: "Roboto", sans-serif;
+  font-size: medium;
+  padding: 0;
+}
+.history-list .history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+.history-list .history-item .history-item-text {
+  margin: 0;
+}
+.history-list .history-item .history-item-button {
+  background-color: #f4f4f4;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  background-color: #e4e4e4;
 }
 
 /*# sourceMappingURL=HistoryPanel.css.map */
