@@ -1,53 +1,14 @@
 import './App.css';
-import LanguageInputField from './LanguageInputField.js';
-import LanguageOutputField from './LanguageOutputField.js';
 import React, {useEffect, useState} from 'react';
 import HistoryPanel from "./HistoryPanel";
-import { debounce } from 'lodash';
+import {FaHistory} from "react-icons/fa";
+import TextTranslationComponent from "./TextTranslationComponent";
 
 function App() {
-    const [input, setInput] = useState('');
-    const [output, setOutput] = useState('');
     const [isHistoryPanelOpen, setHistoryPanelOpen] = useState(false);
     const [words, setWords] = useState([]);
-
-    useEffect(() => {
-        if (input.trim()) {  // Only call debouncedTranslation if input is not just whitespace
-            debouncedTranslation(input);
-        }
-        return () => {
-            //cleanup
-            debouncedTranslation.cancel();
-        }
-    }, [input]);
-
-    const fetchTranslation = async (input) => {
-        console.log(input);
-        try {
-            const response = await fetch("https://libretranslate.com/translate", {
-                method: "POST",
-                body: JSON.stringify({
-                    q: input,
-                    source: "en",
-                    target: "tr",
-                    format: "text",
-                    api_key: "095f84a5-7b79-4d17-8719-a5c1de5e88e2"
-                }),
-                headers: { "Content-Type": "application/json" }
-            });
-            const data = await response.json();
-            console.log(data);
-
-            setOutput(data.translatedText);
-            if(input !== data.translatedText ){
-                addWordTranslationPair(input, data.translatedText);
-            }
-        }catch (e) {
-            console.log(e);
-        }
-    }
-
-    const debouncedTranslation = debounce(fetchTranslation, 500);
+    const [historyInput, setHistoryInput] = useState('');
+    const [historyOutput, setHistoryOutput] = useState('');
 
     const addWordTranslationPair = (word, translated) => {
         const updateWords = [
@@ -63,33 +24,25 @@ function App() {
         setWords(updateWords);
     };
 
-    const speechToText = (text) => {
-        setInput(text);
-    }
-
-
-    const handleInputChange = (event) => {
-        setInput(event.target.value);
-        setOutput(event.target.value);
-    };
-
     const toggleHistoryPanel = () => {
         setHistoryPanelOpen(!isHistoryPanelOpen);
     };
 
-    const onHistoryClicked = (word, translation) => {
-        setInput(word);
-        setOutput(translation);
+    const onHistoryElementClicked = (word, translation) => {
+        setHistoryInput(word);
+        setHistoryOutput(translation);
     }
 
 
     return (
-        <div className="container">
-            {isHistoryPanelOpen && <HistoryPanel words={words} onHistoryClicked={onHistoryClicked}/>}
-            <div className={`main-content ${isHistoryPanelOpen ? 'pushed' : ''}`}>
-                <LanguageInputField inputValue={input} onInputChange={handleInputChange} speechToText = {speechToText}/>
-                <div onClick={toggleHistoryPanel}>History</div>
-                <LanguageOutputField outputValue={output}/>
+        <div className={`container ${isHistoryPanelOpen ? 'pushed' : ''}`}>
+            <header className="header">
+                <h1>Space Translate</h1>
+            </header>
+            {isHistoryPanelOpen && <HistoryPanel words={words} onHistoryClicked={onHistoryElementClicked} toggleHistoryPanel = {toggleHistoryPanel}/>}
+            <div className="main-content">
+                <button className="historty-button" onClick={toggleHistoryPanel}><FaHistory /></button>
+                <TextTranslationComponent inputProp={historyInput} outputProp={historyOutput} addWordTranslationPair={addWordTranslationPair} onHistoryElementClicked={onHistoryElementClicked}/>
             </div>
         </div>
 

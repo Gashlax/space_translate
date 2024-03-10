@@ -1,27 +1,58 @@
+$primary-color: #000000
+
 .App
   text-align: center
-
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+  font-family: "Droid Sans Mono", monospace
 
 .container
-  display: flex
-  flex-direction: row
   align-items: center
   justify-content: center
   height: 100vh
   width: 100vw
+  max-width: 100%
+  overflow: hidden
+  transition: transform 0.3s ease-in-out
+
+.header
+  background-color: #f4f4f4
+  display: flex
+  justify-content: center
+  width: 100vw
+  max-width: 100%
+  h1
+    margin: 0
+    font-size: 2rem
+    color: $primary-color
 
 .main-content
   display: flex
-  flex-wrap: wrap
+  flex-direction: column
   align-items: center
   justify-content: center
   width: 100%
   height: 100%
   background-color: #f4f4f4
-  box-shadow: -2px 0 5px rgba(0,0,0,0.5)
-  transition: transform 0.3s ease-in-out
 
-.main-content.pushed
-  transform: translateX(-25%)
+  .historty-button
+    font-size: 2rem
+    color: $primary-color
+    height: 5%
+    background-color: #f4f4f4
+    border: none
+    cursor: pointer
+    transition: background-color 0.3s ease-in-out
+    &:hover
+      background-color: #e4e4e4
+      border-radius: 500px
+
+
+
+.container.pushed
+  padding-right: 25%
+
 
 
