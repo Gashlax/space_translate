@@ -17,8 +17,8 @@ function App() {
                 key: words.length + 1,
                 word: word,
                 translation: translated,
-                langIn: "tr",
-                langOut: "eng"
+                langIn: "eng",
+                langOut: "tr"
             }
         ];
         setWords(updateWords);
