@@ -1,0 +1,41 @@
+.microphone-button
+  background-color: transparent
+  border: none
+  cursor: pointer
+  outline: none
+  position: relative
+  display: inline-flex
+  align-items: center
+  justify-content: center
+
+
+.microphone-button:hover
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+  background-color: #E0E0E0
+
+.microphone-button
+  padding: 10px
+  display: inline-flex
+  align-items: center
+  justify-content: center
+
+.tooltip-text
+  visibility: hidden
+  background-color: black
+  color: #fff
+  text-align: center
+  border-radius: 6px
+  padding: 5px 0
+  position: absolute
+  z-index: 1
+  bottom: 100%
+  left: 50%
+  transform: translateX(-50%)
+  opacity: 0
+  transition: opacity 0.3s
+
+
+.microphone-button:hover .tooltip-text
+  visibility: visible
+  opacity: 1
+
