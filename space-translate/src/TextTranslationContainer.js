@@ -2,11 +2,12 @@ import LanguageInputField from "./LanguageInputField";
 import LanguageOutputField from "./LanguageOutputField";
 import React, {useEffect, useState} from "react";
 import {debounce} from "lodash";
-import './TextTranslationComponent.sass';
+import './TextTranslationContainer.sass';
 
-export default function TextTranslationComponent({inputProp, outputProp, addWordTranslationPair}) {
+export default function TextTranslationContainer({inputProp, outputProp, sourceLanguage, targetLanguage, addWordTranslationPair}) {
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
+    const [isReadyToSave, setIsReadyToSave] = useState(true);
 
     useEffect(() => {
         setInput(inputProp);
@@ -14,7 +15,7 @@ export default function TextTranslationComponent({inputProp, outputProp, addWord
     }, [inputProp, outputProp]);
 
     useEffect(() => {
-        if (input.trim()) {  // Only call debouncedTranslation if input is not just whitespace
+        if (input.trim()) {
             debouncedTranslation(input);
         }
         return () => {
@@ -30,8 +31,8 @@ export default function TextTranslationComponent({inputProp, outputProp, addWord
                 method: "POST",
                 body: JSON.stringify({
                     q: input,
-                    source: "en",
-                    target: "tr",
+                    source: sourceLanguage,
+                    target: targetLanguage,
                     format: "text",
                     api_key: "095f84a5-7b79-4d17-8719-a5c1de5e88e2"
                 }),
@@ -41,7 +42,7 @@ export default function TextTranslationComponent({inputProp, outputProp, addWord
             console.log(data);
 
             setOutput(data.translatedText);
-            if(input !== data.translatedText || ( input !== inputProp && output !== outputProp )  ){
+            if(input !== data.translatedText && isReadyToSave ){
                 addWordTranslationPair(input, data.translatedText);
             }
         }catch (e) {
@@ -52,8 +53,13 @@ export default function TextTranslationComponent({inputProp, outputProp, addWord
     const debouncedTranslation = debounce(fetchTranslation, 700);
 
 
-    const speechToText = (text) => {
+    const speechToText = (text, isReadyToSave) => {
+        setIsReadyToSave(isReadyToSave)
         setInput(text);
+        if(text !== "" && isReadyToSave){
+            setIsReadyToSave(true);
+            addWordTranslationPair(input, output);
+        }
     }
 
     const handleInputChange = (event) => {
@@ -63,8 +69,8 @@ export default function TextTranslationComponent({inputProp, outputProp, addWord
 
     return(
         <div className="translation-comp">
-            <LanguageInputField inputValue={input} onInputChange={handleInputChange} speechToText = {speechToText}/>
-            <LanguageOutputField outputValue={output}/>
+            <LanguageInputField inputValue={input} sourceLanguage={sourceLanguage} onInputChange={handleInputChange} speechToText = {speechToText}/>
+            <LanguageOutputField outputValue={output} targetLanguage={targetLanguage}/>
         </div>
     );
 
