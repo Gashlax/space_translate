@@ -10,6 +10,13 @@ function App() {
     const [historyInput, setHistoryInput] = useState('');
     const [historyOutput, setHistoryOutput] = useState('');
 
+    useEffect(() => {
+      const storedWords = JSON.parse(localStorage.getItem('words'));
+      if (storedWords) {
+        setWords(storedWords);
+      }
+    }, []);
+
     const addWordTranslationPair = (word, translated) => {
         const updateWords = [
             ...words,
@@ -22,6 +29,7 @@ function App() {
             }
         ];
         setWords(updateWords);
+        localStorage.setItem('words', JSON.stringify(updateWords));
     };
 
     const toggleHistoryPanel = () => {
@@ -41,8 +49,8 @@ function App() {
             </header>
             {isHistoryPanelOpen && <HistoryPanel words={words} onHistoryClicked={onHistoryElementClicked} toggleHistoryPanel = {toggleHistoryPanel}/>}
             <div className="main-content">
-                <button className="historty-button" onClick={toggleHistoryPanel}><FaHistory /></button>
                 <TextTranslationComponent inputProp={historyInput} outputProp={historyOutput} addWordTranslationPair={addWordTranslationPair} onHistoryElementClicked={onHistoryElementClicked}/>
+                <button className="historty-button" onClick={toggleHistoryPanel}><FaHistory /></button>
             </div>
         </div>
 
