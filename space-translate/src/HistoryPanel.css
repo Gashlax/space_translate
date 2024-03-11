@@ -19,7 +19,8 @@
 }
 
 .panel-content {
-  padding: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .history-header {
@@ -27,6 +28,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  padding-left: 20px;
 }
 .history-header h2 {
   margin: 0;
@@ -38,23 +40,33 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
-  background-color: #e4e4e4;
 }
+.history-header .clear-button:hover {
+  background-color: lightgray;
+  color: #333;
+}
+
 .history-list {
+  display: flex;
+  flex-direction: column;
   list-style: none;
   font-family: "Roboto", sans-serif;
   font-size: medium;
   padding: 0;
-  max-height: 500px;
+  max-height: 90vh;
   overflow-y: auto;
 }
 .history-list .history-item {
-  display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  padding: 20px 0;
   border-bottom: 1px solid #ccc;
-  margin-bottom: 10px;
+  cursor: pointer;
+  padding-left: 20px;
+}
+.history-list .history-item:hover {
+  background-color: lightgray;
+  color: #333;
 }
 
 /*# sourceMappingURL=HistoryPanel.css.map */
