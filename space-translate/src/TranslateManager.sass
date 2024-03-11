@@ -2,6 +2,7 @@ $primary-color: #000000
 
 .App
   text-align: center
+
 *
   margin: 0
   padding: 0
@@ -22,6 +23,7 @@ $primary-color: #000000
   display: flex
   justify-content: center
   width: 100vw
+  padding: 15px 0
   max-width: 100%
   h1
     margin: 0
@@ -38,19 +40,41 @@ $primary-color: #000000
   background-color: #f4f4f4
   padding-bottom: 200px
 
-  .historty-button
-    font-size: 2rem
-    color: $primary-color
-    height: 5%
-    background-color: #f4f4f4
+  .history-button
+    background-color: transparent
     border: none
+    padding: 10px
+    font-size: 30px
     cursor: pointer
-    transition: background-color 0.3s ease-in-out
+    outline: none
+    position: relative
+    display: inline-flex
+    align-items: center
+    justify-content: center
+
     &:hover
-      background-color: #e4e4e4
-      border-radius: 500px
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+      background-color: #E0E0E0
 
+  .tooltip-text
+    visibility: hidden
+    background-color: black
+    color: #fff
+    text-align: center
+    border-radius: 6px
+    padding: 5px 10px
+    position: absolute
+    z-index: 1
+    bottom: 100%
+    left: 50%
+    transform: translateX(-50%)
+    opacity: 0
+    transition: opacity 0.3s
+    font-size: medium
 
+  .history-button:hover .tooltip-text
+    visibility: visible
+    opacity: 1
 
 .container.pushed
   padding-right: 25%

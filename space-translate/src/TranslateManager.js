@@ -1,8 +1,8 @@
-import './App.css';
+import './TranslateManager.sass';
 import React, {useEffect, useState} from 'react';
 import HistoryPanel from "./HistoryPanel";
 import {FaHistory} from "react-icons/fa";
-import TextTranslationComponent from "./TextTranslationComponent";
+import TextTranslationContainer from "./TextTranslationContainer";
 
 export default function TranslateManager(){
 
@@ -25,7 +25,7 @@ export default function TranslateManager(){
                 key: words.length + 1,
                 word: word,
                 translation: translated,
-                langIn: "eng",
+                langIn: "en",
                 langOut: "tr"
             }
         ];
@@ -50,8 +50,11 @@ export default function TranslateManager(){
             </header>
             {isHistoryPanelOpen && <HistoryPanel words={words} onHistoryClicked={onHistoryElementClicked} toggleHistoryPanel = {toggleHistoryPanel}/>}
             <div className="main-content">
-                <TextTranslationComponent inputProp={historyInput} outputProp={historyOutput} addWordTranslationPair={addWordTranslationPair}/>
-                <button className="historty-button" onClick={toggleHistoryPanel}><FaHistory /></button>
+                <TextTranslationContainer inputProp={historyInput} outputProp={historyOutput} sourceLanguage={"en"} targetLanguage={"tr"} addWordTranslationPair={addWordTranslationPair}/>
+                <button className="history-button" onClick={toggleHistoryPanel}>
+                    <FaHistory />
+                    <span className="tooltip-text">History</span>
+                </button>
             </div>
         </div>
 

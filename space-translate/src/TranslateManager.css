@@ -1,0 +1,87 @@
+.App {
+  text-align: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Droid Sans Mono", monospace;
+}
+
+.container {
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+}
+
+.header {
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  padding: 15px 0;
+  max-width: 100%;
+}
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #000000;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f4f4f4;
+  padding-bottom: 200px;
+}
+.main-content .history-button {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  font-size: 30px;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.main-content .history-button:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #E0E0E0;
+}
+.main-content .tooltip-text {
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: medium;
+}
+.main-content .history-button:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.container.pushed {
+  padding-right: 25%;
+}
+
+/*# sourceMappingURL=TranslateManager.css.map */
