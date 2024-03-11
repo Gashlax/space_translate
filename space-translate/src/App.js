@@ -49,7 +49,7 @@ function App() {
             </header>
             {isHistoryPanelOpen && <HistoryPanel words={words} onHistoryClicked={onHistoryElementClicked} toggleHistoryPanel = {toggleHistoryPanel}/>}
             <div className="main-content">
-                <TextTranslationComponent inputProp={historyInput} outputProp={historyOutput} addWordTranslationPair={addWordTranslationPair} onHistoryElementClicked={onHistoryElementClicked}/>
+                <TextTranslationComponent inputProp={historyInput} outputProp={historyOutput} addWordTranslationPair={addWordTranslationPair}/>
                 <button className="historty-button" onClick={toggleHistoryPanel}><FaHistory /></button>
             </div>
         </div>
