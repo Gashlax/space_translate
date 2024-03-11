@@ -15,6 +15,7 @@ export default function HistoryPanel( {words, onHistoryClicked, toggleHistoryPan
                     {[...words].reverse().map((element) =>
                         <li key={element.key} className="history-item" onClick={() => onHistoryClicked(element.word, element.translation)}>
                             <div className="language-desc">{element.langIn} <FaArrowRight /> {element.word}</div>
+                            <br/>
                             <div className="translation-part">{element.langOut} <FaArrowRight /> {element.translation}</div>
                         </li>
                      )}
