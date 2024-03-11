@@ -3,11 +3,11 @@ import './LanguageField.sass'
 import SpeechToText from "./SpeechToText";
 import {FaArrowRight} from "react-icons/fa6";
 
-export default function LanguageInputField({inputValue, onInputChange, speechToText}) {
+export default function LanguageInputField({inputValue, sourceLanguage ,onInputChange, speechToText}) {
 
     return (
         <div className="input-container">
-            <h3 className="heading">ENG<FaArrowRight/></h3>
+            <h3 className="heading">{sourceLanguage.toUpperCase()}<FaArrowRight/></h3>
             <textarea
                 className="input-field"
                 onChange={onInputChange}
