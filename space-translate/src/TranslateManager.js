@@ -4,7 +4,7 @@ import HistoryPanel from "./HistoryPanel";
 import {FaHistory} from "react-icons/fa";
 import TextTranslationContainer from "./TextTranslationContainer";
 
-export default function TranslateManager(){
+export default function TranslateManager() {
 
     const [isHistoryPanelOpen, setHistoryPanelOpen] = useState(false);
     const [words, setWords] = useState([]);
@@ -12,10 +12,10 @@ export default function TranslateManager(){
     const [historyOutput, setHistoryOutput] = useState('');
 
     useEffect(() => {
-      const storedWords = JSON.parse(localStorage.getItem('words'));
-      if (storedWords) {
-        setWords(storedWords);
-      }
+        const storedWords = JSON.parse(localStorage.getItem('words'));
+        if (storedWords) {
+            setWords(storedWords);
+        }
     }, []);
 
     const addWordTranslationPair = (word, translated) => {
@@ -43,16 +43,18 @@ export default function TranslateManager(){
     }
 
 
-    return(
+    return (
         <div className={`container ${isHistoryPanelOpen ? 'pushed' : ''}`}>
             <header className="header">
                 <h1>Space Translate</h1>
             </header>
-            {isHistoryPanelOpen && <HistoryPanel words={words} onHistoryClicked={onHistoryElementClicked} toggleHistoryPanel = {toggleHistoryPanel}/>}
+            {isHistoryPanelOpen && <HistoryPanel words={words} onHistoryClicked={onHistoryElementClicked}
+                                                 toggleHistoryPanel={toggleHistoryPanel}/>}
             <div className="main-content">
-                <TextTranslationContainer inputProp={historyInput} outputProp={historyOutput} sourceLanguage={"en"} targetLanguage={"tr"} addWordTranslationPair={addWordTranslationPair}/>
+                <TextTranslationContainer inputProp={historyInput} outputProp={historyOutput} sourceLanguage={"en"}
+                                          targetLanguage={"tr"} addWordTranslationPair={addWordTranslationPair}/>
                 <button className="history-button" onClick={toggleHistoryPanel}>
-                    <FaHistory />
+                    <FaHistory/>
                     <span className="tooltip-text">History</span>
                 </button>
             </div>

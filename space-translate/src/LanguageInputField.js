@@ -3,7 +3,7 @@ import './LanguageField.sass'
 import SpeechToText from "./SpeechToText";
 import {FaArrowRight} from "react-icons/fa6";
 
-export default function LanguageInputField({inputValue, sourceLanguage ,onInputChange, speechToText}) {
+export default function LanguageInputField({inputValue, sourceLanguage, onInputChange, speechToText}) {
 
     return (
         <div className="input-container">
@@ -14,7 +14,7 @@ export default function LanguageInputField({inputValue, sourceLanguage ,onInputC
                 value={inputValue}
                 placeholder="Type something to translate"
             />
-            <SpeechToText onRecord = {speechToText}/>
+            <SpeechToText onRecord={speechToText}/>
         </div>
 
     );

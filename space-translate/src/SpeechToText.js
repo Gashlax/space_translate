@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {FaMicrophone, FaMicrophoneSlash} from "react-icons/fa6";
 import './SpeechToText.sass';
 
-const SpeechToText = ( {onRecord} ) => {
+const SpeechToText = ({onRecord}) => {
     const [isListening, setIsListening] = useState(false);
     const [error, setError] = useState(null);
     const [currentTranscript, setCurrentTranscript] = useState('');
@@ -45,9 +45,9 @@ const SpeechToText = ( {onRecord} ) => {
     return (
         <div className="speech-container">
             <button className="microphone-button" onClick={() => setIsListening(!isListening)}>
-                {isListening ? <FaMicrophoneSlash style={{color: "red", fontSize:'20px'}}/>
+                {isListening ? <FaMicrophoneSlash style={{color: "red", fontSize: '20px'}}/>
                     :
-                    <FaMicrophone style={{color: "green", fontSize:'20px'}}/>}
+                    <FaMicrophone style={{color: "green", fontSize: '20px'}}/>}
                 <span className="tooltip-text">{isListening ? "Close Mic" : "Open Mic"}</span>
             </button>
             {error && <p>Error: {error}</p>}

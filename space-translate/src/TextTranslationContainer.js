@@ -4,7 +4,13 @@ import React, {useEffect, useState} from "react";
 import {debounce} from "lodash";
 import './TextTranslationContainer.sass';
 
-export default function TextTranslationContainer({inputProp, outputProp, sourceLanguage, targetLanguage, addWordTranslationPair}) {
+export default function TextTranslationContainer({
+                                                     inputProp,
+                                                     outputProp,
+                                                     sourceLanguage,
+                                                     targetLanguage,
+                                                     addWordTranslationPair
+                                                 }) {
     const [input, setInput] = useState('');
     const [output, setOutput] = useState('');
     const [isReadyToSave, setIsReadyToSave] = useState(true);
@@ -25,7 +31,6 @@ export default function TextTranslationContainer({inputProp, outputProp, sourceL
     }, [input]);
 
     const fetchTranslation = async (input) => {
-        console.log(input);
         try {
             const response = await fetch("https://libretranslate.com/translate", {
                 method: "POST",
@@ -36,16 +41,15 @@ export default function TextTranslationContainer({inputProp, outputProp, sourceL
                     format: "text",
                     api_key: "095f84a5-7b79-4d17-8719-a5c1de5e88e2"
                 }),
-                headers: { "Content-Type": "application/json" }
+                headers: {"Content-Type": "application/json"}
             });
             const data = await response.json();
-            console.log(data);
 
             setOutput(data.translatedText);
-            if(input !== data.translatedText && isReadyToSave ){
+            if (input !== data.translatedText && isReadyToSave) {
                 addWordTranslationPair(input, data.translatedText);
             }
-        }catch (e) {
+        } catch (e) {
             console.log(e);
         }
     }
@@ -56,7 +60,7 @@ export default function TextTranslationContainer({inputProp, outputProp, sourceL
     const speechToText = (text, isReadyToSave) => {
         setIsReadyToSave(isReadyToSave)
         setInput(text);
-        if(text !== "" && isReadyToSave){
+        if (text !== "" && isReadyToSave) {
             setIsReadyToSave(true);
             addWordTranslationPair(input, output);
         }
@@ -67,9 +71,10 @@ export default function TextTranslationContainer({inputProp, outputProp, sourceL
         setOutput(event.target.value);
     };
 
-    return(
+    return (
         <div className="translation-comp">
-            <LanguageInputField inputValue={input} sourceLanguage={sourceLanguage} onInputChange={handleInputChange} speechToText = {speechToText}/>
+            <LanguageInputField inputValue={input} sourceLanguage={sourceLanguage} onInputChange={handleInputChange}
+                                speechToText={speechToText}/>
             <LanguageOutputField outputValue={output} targetLanguage={targetLanguage}/>
         </div>
     );
