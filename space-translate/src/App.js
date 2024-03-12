@@ -1,4 +1,4 @@
-import TranslateManager from "./TranslateManager";
+import TranslateManager from "./features/Translate/TranslateManager";
 
 function App() {
 
