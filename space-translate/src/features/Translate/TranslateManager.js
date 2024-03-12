@@ -6,30 +6,38 @@ import TextTranslationContainer from "./components/TextTranslationContainer";
 
 export default function TranslateManager() {
   const [isHistoryPanelOpen, setHistoryPanelOpen] = useState(false);
-  const [words, setWords] = useState([]);
+  const [historyElementList, setHistoryElementList] = useState([]);
   const [historyInput, setHistoryInput] = useState("");
   const [historyOutput, setHistoryOutput] = useState("");
 
   useEffect(() => {
-    const storedWords = JSON.parse(localStorage.getItem("words"));
+    const storedWords = JSON.parse(localStorage.getItem("historyList"));
     if (storedWords) {
-      setWords(storedWords);
+      setHistoryElementList(storedWords);
     }
   }, []);
 
-  const addWordTranslationPair = (word, translated) => {
-    const updateWords = [
-      ...words,
+  const saveSearchToHistory = (
+    willBeTranslated,
+    translated,
+    langIn,
+    langOut,
+  ) => {
+    const updatedHistoryElementList = [
+      ...historyElementList,
       {
-        key: words.length + 1,
-        word: word,
+        key: historyElementList.length + 1,
+        willBeTranslated: willBeTranslated,
         translation: translated,
-        langIn: "en",
-        langOut: "tr",
+        langIn: langIn,
+        langOut: langOut,
       },
     ];
-    setWords(updateWords);
-    localStorage.setItem("words", JSON.stringify(updateWords));
+    setHistoryElementList(updatedHistoryElementList);
+    localStorage.setItem(
+      "historyList",
+      JSON.stringify(updatedHistoryElementList),
+    );
   };
 
   const toggleHistoryPanel = () => {
@@ -48,7 +56,7 @@ export default function TranslateManager() {
       </header>
       {isHistoryPanelOpen && (
         <HistoryPanel
-          words={words}
+          historyElementList={historyElementList}
           onHistoryClicked={onHistoryElementClicked}
           toggleHistoryPanel={toggleHistoryPanel}
         />
@@ -59,7 +67,7 @@ export default function TranslateManager() {
           historyOutput={historyOutput}
           sourceLanguage={"en"}
           targetLanguage={"tr"}
-          addWordTranslationPair={addWordTranslationPair}
+          saveSearchToHistory={saveSearchToHistory}
         />
         <button className="history-button" onClick={toggleHistoryPanel}>
           <FaHistory />
