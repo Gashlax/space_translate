@@ -3,7 +3,7 @@ import React from "react";
 import { FaArrowRight, FaXmark } from "react-icons/fa6";
 
 export default function HistoryPanel({
-  words,
+  historyElementList,
   onHistoryClicked,
   toggleHistoryPanel,
 }) {
@@ -17,16 +17,16 @@ export default function HistoryPanel({
           </button>
         </div>
         <ul className="history-list">
-          {[...words].reverse().map((element) => (
+          {[...historyElementList].reverse().map((element) => (
             <li
               key={element.key}
               className="history-item"
               onClick={() =>
-                onHistoryClicked(element.word, element.translation)
+                onHistoryClicked(element.willBeTranslated, element.translation)
               }
             >
               <div className="language-desc">
-                {element.langIn} <FaArrowRight /> {element.word}
+                {element.langIn} <FaArrowRight /> {element.willBeTranslated}
               </div>
               <br />
               <div className="translation-part">
