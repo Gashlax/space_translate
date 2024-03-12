@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaMicrophone, FaMicrophoneSlash } from "react-icons/fa6";
 import "./SpeechToText.sass";
+import ErrorComponent from "./ErrorComponent";
 
 const SpeechToText = ({ onRecord }) => {
   const [isListening, setIsListening] = useState(false);
@@ -8,6 +9,7 @@ const SpeechToText = ({ onRecord }) => {
   const [currentTranscript, setCurrentTranscript] = useState("");
 
   useEffect(() => {
+    setError(null);
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -60,7 +62,7 @@ const SpeechToText = ({ onRecord }) => {
           {isListening ? "Close Mic" : "Open Mic"}
         </span>
       </button>
-      {error && <p>Error: {error}</p>}
+      {error && <ErrorComponent message={error} />}
     </div>
   );
 };

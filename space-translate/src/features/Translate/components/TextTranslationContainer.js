@@ -3,19 +3,23 @@ import LanguageOutputField from "./LanguageOutputField";
 import React, { useEffect, useState } from "react";
 import { debounce } from "lodash";
 import "./TextTranslationContainer.sass";
+import ErrorComponent from "../../../components/ErrorComponent";
 
 export default function TextTranslationContainer({
   historyInput,
   historyOutput,
   sourceLanguage,
   targetLanguage,
-  addWordTranslationPair,
+  saveSearchToHistory,
 }) {
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [isReadyToSave, setIsReadyToSave] = useState(true);
-  //TODO error message state and error component
-  // const [, setHistoryPanelOpen] = useState('');
+  const [
+    isMicClosedAndReadyToSaveToHistory,
+    setIsMicClosedAndReadyToSaveToHistory,
+  ] = useState(true);
+  const [onError, setOnError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     setInput(historyInput);
@@ -45,36 +49,57 @@ export default function TextTranslationContainer({
         }),
         headers: { "Content-Type": "application/json" },
       });
+      if (!response.ok) {
+        setOnError(true);
+        setErrorMessage(
+          "Error occurred while fetching translation from server. Please try again later.",
+        );
+      }
       const data = await response.json();
 
       setOutput(data.translatedText);
-      if (input !== data.translatedText && isReadyToSave) {
-        addWordTranslationPair(input, data.translatedText);
+      if (
+        input !== data.translatedText &&
+        isMicClosedAndReadyToSaveToHistory &&
+        !onError
+      ) {
+        saveSearchToHistory(
+          input,
+          data.translatedText,
+          sourceLanguage,
+          targetLanguage,
+        );
       }
     } catch (e) {
-      // error message state
+      setOnError(true);
+      setErrorMessage(
+        "Error occurred while fetching translation from server. Please try again later.",
+      );
       console.log(e);
     }
   };
 
   const debouncedTranslation = debounce(fetchTranslation, 700);
 
-  const speechToText = (text, isReadyToSave) => {
-    setIsReadyToSave(isReadyToSave);
+  const speechToText = (text, isMicClosedAndReadyToSaveToHistory) => {
+    setIsMicClosedAndReadyToSaveToHistory(isMicClosedAndReadyToSaveToHistory);
     setInput(text);
-    if (text !== "" && isReadyToSave) {
-      setIsReadyToSave(true);
-      addWordTranslationPair(input, output);
+    if (text !== "" && isMicClosedAndReadyToSaveToHistory && !onError) {
+      setIsMicClosedAndReadyToSaveToHistory(true);
+      saveSearchToHistory(input, output, sourceLanguage, targetLanguage);
     }
   };
 
   const handleInputChange = (event) => {
     setInput(event.target.value);
     setOutput(event.target.value);
+    setOnError(false);
+    setErrorMessage("");
   };
 
   return (
     <div className="translation-comp">
+      {onError && <ErrorComponent message={errorMessage} />}
       <LanguageInputField
         inputValue={input}
         sourceLanguage={sourceLanguage}
